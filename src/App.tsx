@@ -33,7 +33,7 @@ export type Tag = {
 
 function App() {
   const [notes, setNotes] = useLocalStorage<RawNote[]>("NOTES", []);
-  const [tags, setTafs] = useLocalStorage<Tag[]>("TAGS", []);
+  const [tags, setTags] = useLocalStorage<Tag[]>("TAGS", []);
 
   const notesWithTags = useMemo(() => {
     return notes.map((note) => {
@@ -53,13 +53,23 @@ function App() {
     });
   }
 
+  function addTag(tag: Tag) {
+    setTags((prev) => [...prev, tag]);
+  }
+
   return (
     <Container className="my-4">
       <Routes>
         <Route path="/" element={<h1>Home</h1>}></Route>
         <Route
           path="/new"
-          element={<NewNote onSubmit={onCreateNote} />}
+          element={
+            <NewNote
+              onSubmit={onCreateNote}
+              onAddTag={addTag}
+              availableTags={tags}
+            />
+          }
         ></Route>
         <Route path="/:id">
           <Route index element={<h1>Show</h1>} />
