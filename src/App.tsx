@@ -1,6 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useMemo } from "react";
-import { Container } from "react-bootstrap";
+import { Container, NavLink } from "react-bootstrap";
 import { Navigate, Route, Routes } from "react-router-dom";
 import NewNote from "./NewNote";
 import { useLocalStorage } from "./useLocalStorage";
@@ -136,6 +136,12 @@ function App() {
         </Route>
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
+      <NavLink
+        className="text-center fixed-bottom mb-3"
+        href="https://github.com/rtokala14/note-taking"
+      >
+        View on GitHub
+      </NavLink>
     </Container>
   );
 }
